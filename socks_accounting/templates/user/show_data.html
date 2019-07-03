@@ -1,0 +1,64 @@
+{% extends 'user/base.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+
+<center>
+
+    {% if profiles %}
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">  مشترکین</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                    <thead>
+                        <th>آی دی</th>
+                        <th>تصویر</th>
+                        <th>نام مشترک </th>
+                        <th>نام خانوادگی مشترک </th>
+                        <th>ایمیل مشترک </th>
+                        <th>شماره تلفن</th>
+
+                    </thead>
+                    {% for profile in profiles %}
+                    <tr >
+                        <td><img src="/user/media/{{ profile.avatar}}" alt="تصویر یافت نشد" height="64px" width="64px"></td>
+                        <td>{{ profile.id }}</td>
+                        <td>{{ profile.user.first_name }}</td>
+                        <td>{{ profile.user.last_name }}</td>
+                        <td>{{ profile.user.email }}</td>
+                        <td>{{ profile.phone_number }}</td>
+
+
+                    </tr>
+                    {% endfor %}
+                </table>
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    </div> 
+    {% endif %}
+
+    <a href="{% url 'new-profile' %}" class="btn btn-secondary ">
+            <span class="icon text-white-50">
+                <i class="fas fa-arrow-right"></i>
+            </span>
+            <span class="text">ثبت مشترک</span>
+        </a>
+
+</center>
+
+
+<script src="{% static 'js/user/show-data.js' %}"></script>
+
+
+
+{% endblock %}
